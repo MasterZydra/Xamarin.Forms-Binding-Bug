@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BindingBug.Views.ItemDetailPage"
+             Title="{Binding Title}">
+    <Grid Margin="10,10,10,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*" />
+            <ColumnDefinition Width="60*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.15*" />
+        </Grid.RowDefinitions>
+
+        <!-- Item identifier -->
+        <Label Text="Item Id:"
+                   Grid.Row="0" />
+        <Label Text="{Binding Item.Id}"
+                   Grid.Row="0" Grid.Column="1"/>
+        <!-- Item details -->
+        <Label Text="Item Text:"
+                   Grid.Row="1" />
+        <Label Text="{Binding Item.Text}"
+                   Grid.Row="1" Grid.Column="1"/>
+        <!-- Item type -->
+        <Label Text="Item Description:"
+                   Grid.Row="2" />
+        <Label Text="{Binding Item.Description}"
+                   Grid.Row="2" Grid.Column="1"/>
+
+        <!-- Item related list 1 -->
+        <Label Text="Item related list 1:" VerticalOptions="End"
+                   Grid.Row="3" Grid.ColumnSpan="2"/>
+        <ListView SelectionMode="None"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding Item.List1}"
+                  Grid.Row="4" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding DetailString}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Item related list 2 -->
+        <Label Text="Item related list 2:" VerticalOptions="End"
+               Grid.Row="5" Grid.ColumnSpan="2"/>
+        <ListView SelectionMode="None" HeightRequest="30"
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding Item.List2}"
+                  Grid.Row="6" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding DetailString}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView> 
+
+        <!-- Button area -->
+        <Button Text="Button 1 (working)"
+                Command="{Binding Command1}"
+                Grid.Row="7" Grid.ColumnSpan="2"/>
+        
+        <Button Text="Button 2 (buggy button)"
+                Command="{Binding Command2}"
+                Grid.Row="8" Grid.ColumnSpan="2"/>
+
+    </Grid>
+</ContentPage>
